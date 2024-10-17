@@ -17,7 +17,7 @@ void main() {
     tex_col = pow(tex_col, gamma);
 
     tex_col.rgb *= voxel_color;
-    tex_col = tex_col * 0.001 + vec3(1);
+//    tex_col = tex_col * 0.001 + vec3(1);
     tex_col *= shading;
 
     tex_col = pow(tex_col, inv_gamma);
