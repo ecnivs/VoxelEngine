@@ -43,6 +43,9 @@ python main.py
 * `L_CTRL`: Move Down
 * `L_Shift`: Sprint
 * `Mouse Movement`
+* `Left Mouse Button`: Remove block
+* `Right Mouse Button`: Place block
+* `1-7`: Change block
 
 
 ### I'd appreciate any feedback or code reviews you might have!
