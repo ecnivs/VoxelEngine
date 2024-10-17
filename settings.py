@@ -42,14 +42,13 @@ V_FOV = glm.radians(FOV_DEG)  # vertical FOV
 H_FOV = 2 * math.atan(math.tan(V_FOV * 0.5) * ASPECT_RATIO)  # horizontal FOV
 NEAR = 0.1
 FAR = 2000.0
-PITCH_MAX = glm.radians(89)
+PITCH_MAX = glm.radians(90)
 
 # player
 PLAYER_SPEED = 0.005
 PLAYER_ROT_SPEED = 0.003
-# PLAYER_POS = glm.vec3(CENTER_XZ, WORLD_H * CHUNK_SIZE, CENTER_XZ)
 PLAYER_POS = glm.vec3(CENTER_XZ, CHUNK_SIZE, CENTER_XZ)
-MOUSE_SENSITIVITY = 0.002
+MOUSE_SENSITIVITY = 0.01
 
 # colors
 BG_COLOR = glm.vec3(0.58, 0.83, 0.99)
