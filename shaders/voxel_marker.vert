@@ -13,7 +13,6 @@ const vec3 marker_colors[2] = vec3[2](vec3(1, 0, 0), vec3(0, 0, 1));
 out vec3 marker_color;
 out vec2 uv;
 
-
 void main() {
     uv = in_tex_coord_0;
     marker_color = marker_colors[mode_id];

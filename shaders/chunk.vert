@@ -16,6 +16,7 @@ flat out int face_id;
 //out vec3 voxel_color;
 out vec2 uv;
 out float shading;
+out vec3 frag_world_pos;
 
 const float ao_values[4] = float[4](0.1, 0.25, 0.5, 1.0);
 
@@ -71,8 +72,10 @@ void main() {
     int uv_index = gl_VertexID % 6  + ((face_id & 1) + flip_id * 2) * 6;
 
     uv = uv_coords[uv_indices[uv_index]];
-//    voxel_color = hash31(voxel_id);
+
     shading = face_shading[face_id] * ao_values[ao_id];
 
-    gl_Position = m_proj * m_view * m_model * vec4(in_position, 1.0);
+    frag_world_pos = (m_model * vec4(in_position, 1.0)).xyz;
+
+    gl_Position = m_proj * m_view * vec4(frag_world_pos, 1.0);
 }
