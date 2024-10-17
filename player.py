@@ -27,11 +27,15 @@ class Player(Camera):
                     voxel_handler.new_voxel_id = event.key - pg.K_0
 
     def mouse_control(self):
+        mouse_x, mouse_y = pg.mouse.get_pos()
         mouse_dx, mouse_dy = pg.mouse.get_rel()
-        if mouse_dx:
-            self.rotate_yaw(delta_x=mouse_dx * MOUSE_SENSITIVITY)
-        if mouse_dy:
-            self.rotate_pitch(delta_y=mouse_dy * MOUSE_SENSITIVITY)
+        if mouse_x <= 0 or mouse_x >= WIN_RES.x - 1 or mouse_y <= 0 or mouse_y >= WIN_RES.y - 1:
+            pg.mouse.set_pos(WIN_RES.x // 2, WIN_RES.y // 2)
+        else:
+            if mouse_dx:
+                self.rotate_yaw(delta_x=mouse_dx * MOUSE_SENSITIVITY)
+            if mouse_dy:
+                self.rotate_pitch(delta_y=mouse_dy * MOUSE_SENSITIVITY)
 
     def keyboard_control(self):
         key_state = pg.key.get_pressed()
