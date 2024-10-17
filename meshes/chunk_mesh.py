@@ -8,6 +8,7 @@ class ChunkMesh(BaseMesh):
         self.chunk = chunk
         self.ctx = self.app.ctx
         self.program = self.app.shader_program.chunk
+
         self.vbo_format = '1u4'
         self.format_size = sum(int(fmt[:1]) for fmt in self.vbo_format.split())
         self.attrs = ('packed_data',)

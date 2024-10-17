@@ -43,6 +43,7 @@ vec3 hash31(float p) {
     return fract((p3.xxy + p3.yzz) * p3.zyx) + 0.05;
 }
 
+
 void unpack(uint packed_data) {
     // a, b, c, d, e, f, g = x, y, z, voxel_id, face_id, ao_id, flip_id
     uint b_bit = 6u, c_bit = 6u, d_bit = 8u, e_bit = 3u, f_bit = 2u, g_bit = 1u;
@@ -63,6 +64,7 @@ void unpack(uint packed_data) {
     ao_id = int((packed_data >> g_bit) & f_mask);
     flip_id = int(packed_data & g_mask);
 }
+
 
 void main() {
     unpack(packed_data);

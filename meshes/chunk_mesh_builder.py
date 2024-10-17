@@ -1,4 +1,3 @@
-from numpy import flip
 from settings import *
 from numba import uint8
 
@@ -70,6 +69,7 @@ def get_chunk_index(world_voxel_pos):
     cz = wz // CHUNK_SIZE
     if not (0 <= cx < WORLD_W and 0 <= cy < WORLD_H and 0 <= cz < WORLD_D):
         return -1
+
     index = cx + WORLD_W * cz + WORLD_AREA * cy
     return index
 
@@ -79,8 +79,10 @@ def is_void(local_voxel_pos, world_voxel_pos, world_voxels):
     if chunk_index == -1:
         return False
     chunk_voxels = world_voxels[chunk_index]
+
     x, y, z = local_voxel_pos
     voxel_index = x % CHUNK_SIZE + z % CHUNK_SIZE * CHUNK_SIZE + y % CHUNK_SIZE * CHUNK_AREA
+
     if chunk_voxels[voxel_index]:
         return False
     return True

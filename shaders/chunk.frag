@@ -11,7 +11,6 @@ in vec3 voxel_color;
 in vec2 uv;
 in float shading;
 
-
 void main() {
     vec3 tex_col = texture(u_texture_0, uv).rgb;
     tex_col = pow(tex_col, gamma);
