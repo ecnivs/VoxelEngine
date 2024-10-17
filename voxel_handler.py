@@ -11,7 +11,7 @@ class VoxelHandler:
         self.voxel_local_pos = None
         self.voxel_world_pos = None
         self.voxel_normal = None
-        self.new_voxel_id = 2
+        self.new_voxel_id = 1
 
     def add_voxel(self):
         if self.voxel_id:
