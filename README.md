@@ -1,7 +1,7 @@
 # Voxel Engine
 
 ## Overview
-This project demonstrates a functional Voxel Engine built in Python, designed to create and interact with 3D block-based worlds. It provides a fully developed example of voxel world generation and manipulation, serving as a foundation for further development or customization.
+This project demonstrates a functional **Voxel Engine** built in Python, designed to create and interact with 3D block-based worlds. It provides a fully developed example of voxel world generation and manipulation, serving as a foundation for further development or customization.
 
 ![swappy-20241017-160041](https://github.com/user-attachments/assets/85268e26-e9ef-4946-9bf0-47c21ab15bb0)
 
