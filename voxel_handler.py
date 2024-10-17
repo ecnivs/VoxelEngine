@@ -5,30 +5,23 @@ class VoxelHandler:
     def __init__(self, world):
         self.app = world.app
         self.chunks = world.chunks
-
-        # ray casting result
         self.chunk = None
         self.voxel_id = None
         self.voxel_index = None
         self.voxel_local_pos = None
         self.voxel_world_pos = None
         self.voxel_normal = None
-
         self.interaction_mode = 0  # 0: remove voxel   1: add voxel
         self.new_voxel_id = 1
 
     def add_voxel(self):
         if self.voxel_id:
-            # check voxel id along normal
             result = self.get_voxel_id(self.voxel_world_pos + self.voxel_normal)
-
-            # is the new place empty?
             if not result[0]:
                 _, voxel_index, _, chunk = result
                 chunk.voxels[voxel_index] = self.new_voxel_id
                 chunk.mesh.rebuild()
 
-                # was it an empty chunk
                 if chunk.is_empty:
                     chunk.is_empty = False
 
@@ -59,7 +52,6 @@ class VoxelHandler:
     def remove_voxel(self):
         if self.voxel_id:
             self.chunk.voxels[self.voxel_index] = 0
-
             self.chunk.mesh.rebuild()
             self.rebuild_adjacent_chunks()
 
@@ -104,7 +96,6 @@ class VoxelHandler:
             if result[0]:
                 self.voxel_id, self.voxel_index, self.voxel_local_pos, self.chunk = result
                 self.voxel_world_pos = current_voxel_pos
-
                 if step_dir == 0:
                     self.voxel_normal.x = -dx
                 elif step_dir == 1:

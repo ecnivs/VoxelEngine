@@ -19,14 +19,9 @@ class World:
             for y in range(WORLD_H):
                 for z in range(WORLD_D):
                     chunk = Chunk(self, position=(x, y, z))
-
                     chunk_index = x + WORLD_W * z + WORLD_AREA * y
                     self.chunks[chunk_index] = chunk
-
-                    # put the chunk voxels in a separate array
                     self.voxels[chunk_index] = chunk.build_voxels()
-
-                    # get pointer to voxels
                     chunk.voxels = self.voxels[chunk_index]
 
     def build_chunk_mesh(self):

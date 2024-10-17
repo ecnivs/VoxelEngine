@@ -12,7 +12,6 @@ class Chunk:
         self.voxels: np.array = None
         self.mesh: ChunkMesh = None
         self.is_empty = True
-
         self.center = (glm.vec3(self.position) + 0.5) * CHUNK_SIZE
         self.is_on_frustum = self.app.player.frustum.is_on_frustum
 
@@ -33,10 +32,8 @@ class Chunk:
 
     def build_voxels(self):
         voxels = np.zeros(CHUNK_VOL, dtype='uint8')
-
         cx, cy, cz = glm.ivec3(self.position) * CHUNK_SIZE
         self.generate_terrain(voxels, cx, cy, cz)
-
         if np.any(voxels):
             self.is_empty = False
         return voxels
