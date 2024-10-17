@@ -11,13 +11,9 @@ class VoxelMarker:
 
     def update(self):
         if self.handler.voxel_id:
-            if self.handler.interaction_mode:
-                self.position = self.handler.voxel_world_pos + self.handler.voxel_normal
-            else:
-                self.position = self.handler.voxel_world_pos
+            self.position = self.handler.voxel_world_pos
 
     def set_uniform(self):
-        self.mesh.program['mode_id'] = self.handler.interaction_mode
         self.mesh.program['m_model'].write(self.get_model_matrix())
 
     def get_model_matrix(self):

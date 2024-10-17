@@ -17,9 +17,9 @@ class Player(Camera):
         if event.type == pg.MOUSEBUTTONDOWN:
             voxel_handler = self.app.scene.world.voxel_handler
             if event.button == 1:
-                voxel_handler.set_voxel()
+                voxel_handler.remove_voxel()
             if event.button == 3:
-                voxel_handler.switch_mode()
+                voxel_handler.add_voxel()
 
     def mouse_control(self):
         mouse_dx, mouse_dy = pg.mouse.get_rel()

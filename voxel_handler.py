@@ -11,8 +11,7 @@ class VoxelHandler:
         self.voxel_local_pos = None
         self.voxel_world_pos = None
         self.voxel_normal = None
-        self.interaction_mode = 0  # 0: remove voxel   1: add voxel
-        self.new_voxel_id = 1
+        self.new_voxel_id = 2
 
     def add_voxel(self):
         if self.voxel_id:
@@ -21,7 +20,6 @@ class VoxelHandler:
                 _, voxel_index, _, chunk = result
                 chunk.voxels[voxel_index] = self.new_voxel_id
                 chunk.mesh.rebuild()
-
                 if chunk.is_empty:
                     chunk.is_empty = False
 
@@ -54,15 +52,6 @@ class VoxelHandler:
             self.chunk.voxels[self.voxel_index] = 0
             self.chunk.mesh.rebuild()
             self.rebuild_adjacent_chunks()
-
-    def set_voxel(self):
-        if self.interaction_mode:
-            self.add_voxel()
-        else:
-            self.remove_voxel()
-
-    def switch_mode(self):
-        self.interaction_mode = not self.interaction_mode
 
     def update(self):
         self.ray_cast()
