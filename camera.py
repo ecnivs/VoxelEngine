@@ -34,7 +34,7 @@ class Camera:
         self.pitch = glm.clamp(self.pitch, -PITCH_MAX, PITCH_MAX)
 
     def rotate_yaw(self, delta_x):
-        self.yaw = (self.yaw + delta_x) % 360
+        self.yaw += delta_x
 
     def move_left(self, velocity):
         self.position -= self.right * velocity
