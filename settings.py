@@ -10,6 +10,7 @@ NUM_SAMPLES = 1  # antialiasing
 
 # resolution
 WIN_RES = glm.vec2(1600, 900)
+FPS = 120
 
 # world generation
 SEED = 16
