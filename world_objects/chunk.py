@@ -39,12 +39,10 @@ class Chunk:
                 wz = z + cz
                 world_height = int(glm.simplex(glm.vec2(wx, wz) * 0.01) * 32 + 32)
                 local_height = min(world_height - cy, CHUNK_SIZE)
-
                 for y in range(local_height):
                     wy = y + cy
                     voxels[x + CHUNK_SIZE * z + CHUNK_AREA * y] = wy + 1
 
         if np.any(voxels):
             self.is_empty = False
-
         return voxels
