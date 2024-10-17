@@ -22,7 +22,9 @@ class Player(Camera):
     def keyboard_control(self):
         key_state = pg.key.get_pressed()
         vel = PLAYER_SPEED * self.app.delta_time
-        if key_state[pg.K_w]:
+        if key_state[pg.K_LSHIFT] and key_state[pg.K_w]:
+            self.move_forward(vel * 2)
+        elif key_state[pg.K_w]:
             self.move_forward(vel)
         if key_state[pg.K_s]:
             self.move_back(vel)
@@ -32,5 +34,5 @@ class Player(Camera):
             self.move_left(vel)
         if key_state[pg.K_SPACE]:
             self.move_up(vel)
-        if key_state[pg.K_LSHIFT]:
+        if key_state[pg.K_LCTRL]:
             self.move_down(vel)
