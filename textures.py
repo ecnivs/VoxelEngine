@@ -21,7 +21,7 @@ class Textures:
         texture = pg.transform.flip(texture, flip_x=True, flip_y=False)
 
         if is_tex_array:
-            num_layers = 3 * texture.get_height() // texture.get_width()  # 3 textures per layer
+            num_layers = 3 * texture.get_height() // texture.get_width()
             texture = self.app.ctx.texture_array(
                 size=(texture.get_width(), texture.get_height() // num_layers, num_layers),
                 components=4,

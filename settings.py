@@ -38,8 +38,8 @@ CENTER_Y = WORLD_H * H_CHUNK_SIZE
 # camera
 ASPECT_RATIO = WIN_RES.x / WIN_RES.y
 FOV_DEG = 50
-V_FOV = glm.radians(FOV_DEG)  # vertical FOV
-H_FOV = 2 * math.atan(math.tan(V_FOV * 0.5) * ASPECT_RATIO)  # horizontal FOV
+V_FOV = glm.radians(FOV_DEG)
+H_FOV = 2 * math.atan(math.tan(V_FOV * 0.5) * ASPECT_RATIO)
 NEAR = 0.1
 FAR = 2000.0
 PITCH_MAX = glm.radians(90)
