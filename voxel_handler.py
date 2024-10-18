@@ -80,7 +80,6 @@ class VoxelHandler:
         max_z = delta_z * (1.0 - glm.fract(z1)) if dz > 0 else delta_z * glm.fract(z1)
 
         while not (max_x > 1.0 and max_y > 1.0 and max_z > 1.0):
-
             result = self.get_voxel_id(voxel_world_pos=current_voxel_pos)
             if result[0]:
                 self.voxel_id, self.voxel_index, self.voxel_local_pos, self.chunk = result

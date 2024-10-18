@@ -15,7 +15,7 @@ class Player(Camera):
     def handle_event(self, event):
         voxel_handler = self.app.scene.world.voxel_handler
 
-        if event.type == pg.MOUSEBUTTONDOWN:   
+        if event.type == pg.MOUSEBUTTONDOWN:
             if event.button == 1:
                 voxel_handler.remove_voxel()
             if event.button == 3:
