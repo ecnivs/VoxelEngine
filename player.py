@@ -41,7 +41,7 @@ class Player(Camera):
         key_state = pg.key.get_pressed()
         velocity = PLAYER_SPEED * self.app.delta_time
         if key_state[pg.K_LSHIFT]:
-            vel = velocity * 3
+            vel = velocity * 2
         else:
             vel = velocity
         if key_state[pg.K_w]:
