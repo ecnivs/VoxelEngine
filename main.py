@@ -45,7 +45,6 @@ class VoxelEngine:
         self.delta_time = self.clock.tick(FPS)
         self.time = pg.time.get_ticks() * 0.001
         pg.display.set_caption(f'{self.clock.get_fps() :.0f}')
-        #print(f'FPS: {self.clock.get_fps()}')
 
     def render(self):
         self.ctx.clear(color=BG_COLOR)
