@@ -3,16 +3,20 @@ from camera import Camera
 from settings import *
 
 class Player(Camera):
+    """Player class that extends Camera, allowing movement and interaction within the voxel world."""
     def __init__(self, app, position=PLAYER_POS, yaw=-90, pitch=0):
+        """Initializes the player with a reference to the application, starting position, yaw, and pitch."""
         self.app = app
         super().__init__(position, yaw, pitch)
 
     def update(self):
+        """Updates the player's movement and camera orientation."""
         self.keyboard_control()
         self.mouse_control()
         super().update()
 
     def handle_event(self, event):
+        """Handles player input for voxel interaction."""
         voxel_handler = self.app.scene.world.voxel_handler
 
         if event.type == pg.MOUSEBUTTONDOWN:
@@ -27,6 +31,7 @@ class Player(Camera):
                     voxel_handler.new_voxel_id = event.key - pg.K_0
 
     def mouse_control(self):
+        """Handles mouse movement for camera rotation."""
         mouse_x, mouse_y = pg.mouse.get_pos()
         mouse_dx, mouse_dy = pg.mouse.get_rel()
         if mouse_x <= 0 or mouse_x >= WIN_RES.x - 1 or mouse_y <= 0 or mouse_y >= WIN_RES.y - 1:
@@ -38,10 +43,11 @@ class Player(Camera):
                 self.rotate_pitch(delta_y=mouse_dy * MOUSE_SENSITIVITY)
 
     def keyboard_control(self):
+        """Handles keyboard inputs for movement."""
         key_state = pg.key.get_pressed()
         velocity = PLAYER_SPEED * self.app.delta_time
         if key_state[pg.K_LSHIFT]:
-            vel = velocity * 2
+            vel = velocity * 2 # Sprinting
         else:
             vel = velocity
         if key_state[pg.K_w]:

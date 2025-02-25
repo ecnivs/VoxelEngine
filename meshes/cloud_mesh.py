@@ -3,7 +3,14 @@ from meshes.base_mesh import BaseMesh
 from noise import *
 
 class CloudMesh(BaseMesh):
+    """A class responsible for generating and rendering cloud meshes in the voxel world."""
     def __init__(self, app):
+        """
+        Initialize the CloudMesh object.
+
+        Parameters:
+            app: The main application instance.
+        """
         super().__init__()
         self.app = app
 
@@ -14,6 +21,12 @@ class CloudMesh(BaseMesh):
         self.vao = self.get_vao()
 
     def get_vertex_data(self):
+        """
+        Generate and return vertex data for clouds.
+
+        Returns:
+            ndarray: Processed vertex data for cloud rendering.
+        """
         cloud_data = np.zeros(WORLD_AREA * CHUNK_SIZE ** 2, dtype='uint8')
         self.gen_clouds(cloud_data)
 
@@ -22,6 +35,12 @@ class CloudMesh(BaseMesh):
     @staticmethod
     @njit
     def gen_clouds(cloud_data):
+        """
+        Generate cloud coverage using 2D noise.
+
+        Parameters:
+            cloud_data (ndarray): The array storing cloud voxel information.
+        """
         for x in range(WORLD_W * CHUNK_SIZE):
             for z in range(WORLD_D * CHUNK_SIZE):
 
@@ -32,6 +51,15 @@ class CloudMesh(BaseMesh):
     @staticmethod
     @njit
     def build_mesh(cloud_data):
+        """
+        Build a cloud mesh by grouping connected cloud voxels into larger quads.
+
+        Parameters:
+            cloud_data (ndarray): The array containing cloud voxel data.
+
+        Returns:
+            ndarray: The generated mesh data for rendering clouds.
+        """
         mesh = np.empty(WORLD_AREA * CHUNK_AREA * 6 * 3, dtype='uint16')
         index = 0
         width = WORLD_W * CHUNK_SIZE

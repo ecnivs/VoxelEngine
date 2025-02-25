@@ -3,10 +3,22 @@ from numba import uint8
 
 @njit
 def get_ao(local_pos, world_pos, world_voxels, plane):
+    """
+    Calculate ambient occlusion (AO) for a voxel face based on neighboring empty spaces.
+
+    Parameters:
+        local_pos (tuple): The (x, y, z) position in the chunk.
+        world_pos (tuple): The (x, y, z) position in the world.
+        world_voxels (array): The voxel data of the world.
+        plane (str): The plane ('X', 'Y', or 'Z') to check for AO.
+
+    Returns:
+        tuple: AO values for the four vertices of the voxel face.
+    """
     x, y, z = local_pos
     wx, wy, wz = world_pos
 
-    if plane == 'Y':
+    if plane == 'Y': 
         a = is_void((x    , y, z - 1), (wx    , wy, wz - 1), world_voxels)
         b = is_void((x - 1, y, z - 1), (wx - 1, wy, wz - 1), world_voxels)
         c = is_void((x - 1, y, z    ), (wx - 1, wy, wz    ), world_voxels)
@@ -61,6 +73,15 @@ def pack_data(x, y, z, voxel_id, face_id, ao_id, flip_id):
 
 @njit
 def get_chunk_index(world_voxel_pos):
+    """
+    Get the index of the chunk that contains the given world voxel position.
+
+    Parameters:
+        world_voxel_pos (tuple): (wx, wy, wz) world voxel coordinates.
+
+    Returns:
+        int: Index of the chunk in the world voxel array, or -1 if out of bounds.
+    """
     wx, wy, wz = world_voxel_pos
     cx = wx // CHUNK_SIZE
     cy = wy // CHUNK_SIZE
@@ -73,6 +94,7 @@ def get_chunk_index(world_voxel_pos):
 
 @njit
 def is_void(local_voxel_pos, world_voxel_pos, world_voxels):
+    """Check if a voxel position is empty (void)."""
     chunk_index = get_chunk_index(world_voxel_pos)
     if chunk_index == -1:
         return False
@@ -94,6 +116,7 @@ def add_data(vertex_data, index, *vertices):
 
 @njit
 def build_chunk_mesh(chunk_voxels, format_size, chunk_pos, world_voxels):
+    """Generate the mesh data for a voxel chunk"""
     vertex_data = np.empty(CHUNK_VOL * 18 * format_size, dtype='uint32')
     index = 0
 

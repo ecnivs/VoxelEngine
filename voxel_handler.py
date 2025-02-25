@@ -2,7 +2,14 @@ from settings import *
 from meshes.chunk_mesh_builder import get_chunk_index
 
 class VoxelHandler:
+    """Handles voxel interactions, such as adding and removing voxels, and rebuilding chunk meshes when modifications occur."""
     def __init__(self, world):
+        """
+        Initializes the voxel handler with references to the world and its chunks.
+
+        Parameters:
+            world: The world instance managing the voxel terrain.
+        """
         self.app = world.app
         self.chunks = world.chunks
         self.chunk = None
@@ -14,6 +21,7 @@ class VoxelHandler:
         self.new_voxel_id = 1
 
     def add_voxel(self):
+        """Adds a voxel at the targeted position if it is empty, then rebuilds the chunk mesh."""
         if self.voxel_id:
             result = self.get_voxel_id(self.voxel_world_pos + self.voxel_normal)
             if not result[0]:
@@ -24,11 +32,18 @@ class VoxelHandler:
                     chunk.is_empty = False
 
     def rebuild_adj_chunk(self, adj_voxel_pos):
+        """
+        Rebuilds the mesh of an adjacent chunk if the voxel modification affects it.
+
+        Parameters:
+            adj_voxel_pos: The world position of the adjacent voxel.
+        """
         index = get_chunk_index(adj_voxel_pos)
         if index != -1:
             self.chunks[index].mesh.rebuild()
 
     def rebuild_adjacent_chunks(self):
+        """Rebuilds the meshes of chunks adjacent to the modified voxel."""
         lx, ly, lz = self.voxel_local_pos
         wx, wy, wz = self.voxel_world_pos
 
@@ -48,15 +63,18 @@ class VoxelHandler:
             self.rebuild_adj_chunk((wx, wy, wz + 1))
 
     def remove_voxel(self):
+        """Removes a voxel at the targeted position and rebuilds affected chunk meshes."""
         if self.voxel_id:
             self.chunk.voxels[self.voxel_index] = 0
             self.chunk.mesh.rebuild()
             self.rebuild_adjacent_chunks()
 
     def update(self):
+        """Updates the voxel handler by performing a raycast to detect voxel interactions."""
         self.ray_cast()
 
     def ray_cast(self):
+        """Casts a ray from the player's position to detect voxel collisions."""
         # start point
         x1, y1, z1 = self.app.player.position
         # end point
@@ -113,6 +131,15 @@ class VoxelHandler:
         return False
 
     def get_voxel_id(self, voxel_world_pos):
+        """
+        Retrieves voxel data from the given world position.
+
+        Parameters:
+            voxel_world_pos: The world position of the voxel.
+
+        Returns:
+            Tuple containing voxel ID, index, local position, and chunk reference.
+        """
         cx, cy, cz = chunk_pos = voxel_world_pos / CHUNK_SIZE
 
         if 0 <= cx < WORLD_W and 0 <= cy < WORLD_H and 0 <= cz < WORLD_D:

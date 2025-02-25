@@ -2,7 +2,9 @@ from settings import *
 from frustum import Frustum
 
 class Camera:
+    """Camera class that handles the player's perspective and movement."""
     def __init__(self, position, yaw, pitch):
+        """Initializes the camera with a position, yaw and pitch angles."""
         self.position = glm.vec3(position)
         self.yaw = glm.radians(yaw)
         self.pitch = glm.radians(pitch)
@@ -14,13 +16,16 @@ class Camera:
         self.frustum = Frustum(self)
 
     def update(self):
+        """Updates the camera's vectors and view matrix."""
         self.update_vectors()
         self.update_view_matrix()
 
     def update_view_matrix(self):
+        """Updates the view matrix based on the camera's position and direction."""
         self.m_view = glm.lookAt(self.position, self.position + self.forward, self.up)
 
     def update_vectors(self):
+        """Recalculates the camera's directional vectors based on yaw and pitch angles."""
         self.forward.x = glm.cos(self.yaw) * glm.cos(self.pitch)
         self.forward.y = glm.sin(self.pitch)
         self.forward.z = glm.sin(self.yaw) * glm.cos(self.pitch)
@@ -30,26 +35,34 @@ class Camera:
         self.up = glm.normalize(glm.cross(self.right, self.forward))
 
     def rotate_pitch(self, delta_y):
+        """Adjusts the camera's pitch angle while clamping it within a defined range."""
         self.pitch -= delta_y
         self.pitch = glm.clamp(self.pitch, -PITCH_MAX, PITCH_MAX)
 
     def rotate_yaw(self, delta_x):
+        """Adjusts the camera's yaw angle."""
         self.yaw += delta_x
 
     def move_left(self, velocity):
+        """Moves the camera to the left based on the right vector."""
         self.position -= self.right * velocity
 
     def move_right(self, velocity):
+        """Moves the camera to the right based on the right vector."""
         self.position += self.right * velocity
 
     def move_up(self, velocity):
+        """Moves the camera upwards along the up vector."""
         self.position += self.up * velocity
 
     def move_down(self, velocity):
+        """Moves the camera downwards along the up vector."""
         self.position -= self.up * velocity
 
     def move_forward(self, velocity):
+        """Moves the camera foreward along the forward vector."""
         self.position += self.forward * velocity
 
     def move_back(self, velocity):
+        """Moves the camera backward along the forward vector."""
         self.position -= self.forward * velocity

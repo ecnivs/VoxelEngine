@@ -4,6 +4,16 @@ from settings import *
 
 @njit
 def get_height(x, z):
+    """
+    Calculates the terrain height at a given (x, z) position, incorporating noise-based elevation and an island mask.
+
+    Parameters:
+        x (int): The x-coordinate in world space.
+        z (int): The z-coordinate in world space.
+
+    Returns:
+        int: The calculated height of the terrain at the given coordinates.
+    """
     # island mask
     island = 1 / (pow(0.0025 * math.hypot(x - CENTER_XZ, z - CENTER_XZ), 20) + 0.0001)
     island = min(island, 1)
@@ -32,10 +42,30 @@ def get_height(x, z):
 
 @njit
 def get_index(x, y, z):
+    """
+    Computes the 1D index for a voxel within a chunk, based on its 3D coordinates.
+
+    Parameters:
+        x (int): X position within the chunk.
+        y (int): Y position within the chunk.
+        z (int): Z position within the chunk.
+
+    Returns:
+        int: The computed index for the voxel.
+    """
     return x + CHUNK_SIZE * z + CHUNK_AREA * y
 
 @njit
 def set_voxel_id(voxels, x, y, z, wx, wy, wz, world_height):
+    """
+    Determines and sets the voxel type at a given position based on world height and noise values.
+
+    Parameters:
+        voxels (ndarray): The voxel array storing terrain data.
+        x, y, z (int): Local chunk coordinates of the voxel.
+        wx, wy, wz (int): World coordinates of the voxel.
+        world_height (int): The computed height of the terrain at this position.
+    """
     voxel_id = 0
 
     if wy < world_height - 1:
@@ -73,6 +103,14 @@ def set_voxel_id(voxels, x, y, z, wx, wy, wz, world_height):
 
 @njit
 def place_tree(voxels, x, y, z, voxel_id):
+    """
+    Attempts to place a tree at a given location if conditions are met.
+
+    Parameters:
+        voxels (ndarray): The voxel array storing terrain data.
+        x, y, z (int): Local chunk coordinates of the potential tree position.
+        voxel_id (int): The ID of the voxel at the given location.
+    """
     rnd = random()
     if voxel_id != GRASS or rnd > TREE_PROBABILITY:
         return None
