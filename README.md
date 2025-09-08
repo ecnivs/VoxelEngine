@@ -3,6 +3,19 @@
 
 ![swappy-20241017-160041](https://github.com/user-attachments/assets/85268e26-e9ef-4946-9bf0-47c21ab15bb0)
 
+<p align="center">
+  <a href="https://github.com/ecnivs/voxelengine/stargazers">
+    <img src="https://img.shields.io/github/stars/ecnivs/voxelengine?style=flat-square">
+  </a>
+  <a href="https://github.com/ecnivs/voxelengine/issues">
+    <img src="https://img.shields.io/github/issues/ecnivs/voxelengine?style=flat-square">
+  </a>
+  <a href="https://github.com/ecnivs/voxelengine/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/ecnivs/voxelengine?style=flat-square">
+  </a>
+  <img src="https://img.shields.io/github/languages/top/ecnivs/voxelengine?style=flat-square">
+</p>
+
 ## Overview
 This project demonstrates a functional **Voxel Engine** built in Python, designed to create and interact with 3D block-based worlds. It provides a fully developed example of [voxel](https://en.wikipedia.org/wiki/Voxel) world generation and manipulation, serving as a foundation for further development or customization.
 
