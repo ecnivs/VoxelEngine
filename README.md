@@ -27,7 +27,7 @@ This project demonstrates a functional **Voxel Engine** built in Python, designe
   * random
   * noise `pip install noise`
   * numpy `pip install numpy`
-  * glm `pip install glm`
+  * glm `pip install pyglm`
   * math
   * numba `pip install numba`
   * opensimplex `pip install opensimplex`
