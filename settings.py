@@ -9,11 +9,11 @@ DEPTH_SIZE = 24  # Depth buffer precision
 NUM_SAMPLES = 1  # Antialiasing sample count
 
 # Resolution settings
-WIN_RES = glm.vec2(1600, 900)  # Window resolution
+WIN_RES = glm.vec2(1920, 1080)  # Window resolution
 FPS = 120  # Target frames per second
 
 # World generation seed
-SEED = 16  # Random seed for procedural generation
+SEED = 8402  # Random seed for procedural generation
 
 # Ray casting settings
 MAX_RAY_DIST = 6  # Maximum distance for ray tracing (used for voxel selection)
