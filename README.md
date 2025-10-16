@@ -1,7 +1,11 @@
 <h1 align="center">Voxel Engine</h1>
 <p align="center"><em>Voxel renderer with pygame</em></p>
 
+<div align="center">
+
 ![swappy-20241017-160041](https://github.com/user-attachments/assets/85268e26-e9ef-4946-9bf0-47c21ab15bb0)
+
+</div>
 
 <p align="center">
   <a href="https://github.com/ecnivs/voxelengine/stargazers">
